@@ -48,4 +48,28 @@ public class ArrayProblems {
 
         return new int[0];
     }
+
+    public static int[] sortedSquaredArray(int[] array) {
+        // Time = O(n * log(n))
+        return Arrays.stream(array).map(num -> num * num).sorted().toArray();
+    }
+
+    public static int[] sortedSquaredArray2(int[] array) {
+        // Time = O(n) - more optimal
+        int[] result = Arrays.stream(array).map(num -> 0).toArray();
+        int start = 0, end = array.length - 1;
+
+        for (int i = array.length-1; i >= 0 ; i--) {
+            if (Math.abs(array[start]) > Math.abs(array[end])) {
+                result[i] = array[start] * array[start];
+                start += 1;
+            } else {
+                result[i] = array[end] * array[end];
+                end -= 1;
+            }
+        }
+
+        return result;
+    }
+
 }
